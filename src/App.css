@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+/* Main content area that adjusts based on sidebar state */
+.main-content {
+  margin-left: 120px; /* Space for collapsed sidebar (80px + 40px padding) */
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
