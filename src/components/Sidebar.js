@@ -15,7 +15,6 @@ const Sidebar = ({ onToggle }) => {
     { id: "setting", icon: "⚙️", label: "Setting" }
   ];
 
-
   const toggleSidebar = () => {
     const newState = !isCollapsed;
     setIsCollapsed(newState);
@@ -53,14 +52,13 @@ const Sidebar = ({ onToggle }) => {
           </div>
           <div className="sidebar-menu">
             {menuItems.map((item, index) => (
-              <a
+              <div
                 key={item.id}
                 className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => { handleIconClick(item.id); }}
-                href={`/${item.id}`}
+                onClick={() => handleIconClick(item.id)}
               >
                 <span className="menu-icon">{item.icon}</span>
-              </a>
+              </div>
             ))}
           </div>
         </div>
@@ -75,15 +73,14 @@ const Sidebar = ({ onToggle }) => {
           </div>
           <div className="sidebar-menu">
             {menuItems.map((item) => (
-              <a
+              <div
                 key={item.id}
                 className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => { handleIconClick(item.id); }}
-                href={`/${item.id}`}
+                onClick={() => handleIconClick(item.id)}
               >
                 <span className="menu-icon">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
-              </a>
+              </div>
             ))}
           </div>
         </div>
