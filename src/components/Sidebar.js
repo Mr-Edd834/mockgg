@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = ({ onToggle }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [activeItem, setActiveItem] = useState("dashboard");
-  const navigate = useNavigate();
 
   const menuItems = [
     { id: "dashboard", img:"/Icons/icons8-dashboard-layout-24.png", label: "Dashboard" },
@@ -17,15 +15,6 @@ const Sidebar = ({ onToggle }) => {
     { id: "setting", icon: "⚙️", label: "Setting" }
   ];
 
-  const routeMap = {
-    "dashboard": "/",
-    "food-order": "/food-order",
-    "favorite": "/favorite",
-    "message": "/messages",
-    "order-history": "/order-history",
-    "bills": "/bills",
-    "setting": "/settings"
-  };
 
   const toggleSidebar = () => {
     const newState = !isCollapsed;
@@ -39,18 +28,15 @@ const Sidebar = ({ onToggle }) => {
       setActiveItem(itemId);
       setIsCollapsed(false);
       onToggle(false);
-      navigate(routeMap[itemId] || "/");
     } else {
       // If sidebar is open, check if it's the same item
       if (activeItem === itemId) {
         // Same item pressed - collapse the sidebar
         setIsCollapsed(true);
         onToggle(true);
-        navigate(routeMap[itemId] || "/");
       } else {
         // Different item pressed - just change active item, keep sidebar open
         setActiveItem(itemId);
-        navigate(routeMap[itemId] || "/");
       }
     }
   };
@@ -67,13 +53,14 @@ const Sidebar = ({ onToggle }) => {
           </div>
           <div className="sidebar-menu">
             {menuItems.map((item, index) => (
-              <div
+              <a
                 key={item.id}
                 className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => handleIconClick(item.id)}
+                onClick={() => { handleIconClick(item.id); }}
+                href={`/${item.id}`}
               >
                 <span className="menu-icon">{item.icon}</span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -88,14 +75,15 @@ const Sidebar = ({ onToggle }) => {
           </div>
           <div className="sidebar-menu">
             {menuItems.map((item) => (
-              <div
+              <a
                 key={item.id}
                 className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => handleIconClick(item.id)}
+                onClick={() => { handleIconClick(item.id); }}
+                href={`/${item.id}`}
               >
                 <span className="menu-icon">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
