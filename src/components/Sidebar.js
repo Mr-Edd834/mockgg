@@ -1,19 +1,31 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = ({ onToggle }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [activeItem, setActiveItem] = useState("dashboard");
+  const navigate = useNavigate();
 
   const menuItems = [
-    { id: "dashboard", icon: "👤", label: "Dashboard" },
+    { id: "dashboard", img:"/Icons/icons8-dashboard-layout-24.png", label: "Dashboard" },
     { id: "food-order", icon: "🛒", label: "Food Order" },
     { id: "favorite", icon: "❤️", label: "Favorite" },
     { id: "message", icon: "💬", label: "Message" },
     { id: "order-history", icon: "🕒", label: "Order History" },
-    { id: "bills", icon: "🧾", label: "Bills" },
+    { id: "bills", Image: "public/Icons/icons8-shopping-basket.gif", label: "Basket" },
     { id: "setting", icon: "⚙️", label: "Setting" }
   ];
+
+  const routeMap = {
+    "dashboard": "/",
+    "food-order": "/food-order",
+    "favorite": "/favorite",
+    "message": "/messages",
+    "order-history": "/order-history",
+    "bills": "/bills",
+    "setting": "/settings"
+  };
 
   const toggleSidebar = () => {
     const newState = !isCollapsed;
@@ -27,15 +39,18 @@ const Sidebar = ({ onToggle }) => {
       setActiveItem(itemId);
       setIsCollapsed(false);
       onToggle(false);
+      navigate(routeMap[itemId] || "/");
     } else {
       // If sidebar is open, check if it's the same item
       if (activeItem === itemId) {
         // Same item pressed - collapse the sidebar
         setIsCollapsed(true);
         onToggle(true);
+        navigate(routeMap[itemId] || "/");
       } else {
         // Different item pressed - just change active item, keep sidebar open
         setActiveItem(itemId);
+        navigate(routeMap[itemId] || "/");
       }
     }
   };
