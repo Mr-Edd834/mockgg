@@ -1,4 +1,12 @@
 import React, { useState } from "react";
+import {
+  LayoutDashboard,
+  ShoppingCart,
+  Heart,
+  Clock,
+  ShoppingBasket,
+  Settings,
+} from "lucide-react"; // <-- icon pack
 import "./Sidebar.css";
 
 const Sidebar = ({ onToggle }) => {
@@ -6,13 +14,12 @@ const Sidebar = ({ onToggle }) => {
   const [activeItem, setActiveItem] = useState("dashboard");
 
   const menuItems = [
-    { id: "dashboard", img:"/Icons/icons8-dashboard-layout-24.png", label: "Dashboard" },
-    { id: "food-order", icon: "🛒", label: "Food Order" },
-    { id: "favorite", icon: "❤️", label: "Favorite" },
-    { id: "message", icon: "💬", label: "Message" },
-    { id: "order-history", icon: "🕒", label: "Order History" },
-    { id: "bills", img: "/Icons/icons8-shopping-basket.gif", label: "Basket" },
-    { id: "setting", icon: "⚙️", label: "Setting" }
+    { id: "dashboard", icon: <LayoutDashboard size={24} />, label: "Dashboard",path:"/" },
+    { id: "food-order", icon: <ShoppingCart size={24} />, label: "Food Order",path:"/checkout" },
+    { id: "favorite", icon: <Heart size={24} />, label: "Favorite",path:"/favorites" },
+    { id: "order-history", icon: <Clock size={24} />, label: "Order History",path:"/orderhistory" },
+    { id: "bills", icon: <ShoppingBasket size={24} />, label: "Basket", path:"/myorder" },
+    { id: "setting", icon: <Settings size={24} />, label: "Setting",path:"/profile" },
   ];
 
   const toggleSidebar = () => {
@@ -23,18 +30,14 @@ const Sidebar = ({ onToggle }) => {
 
   const handleIconClick = (itemId) => {
     if (isCollapsed) {
-      // If sidebar is collapsed, open it and set the active item
       setActiveItem(itemId);
       setIsCollapsed(false);
       onToggle(false);
     } else {
-      // If sidebar is open, check if it's the same item
       if (activeItem === itemId) {
-        // Same item pressed - collapse the sidebar
         setIsCollapsed(true);
         onToggle(true);
       } else {
-        // Different item pressed - just change active item, keep sidebar open
         setActiveItem(itemId);
       }
     }
@@ -51,10 +54,10 @@ const Sidebar = ({ onToggle }) => {
             </button>
           </div>
           <div className="sidebar-menu">
-            {menuItems.map((item, index) => (
+            {menuItems.map((item) => (
               <div
                 key={item.id}
-                className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
+                className={`menu-item ${activeItem === item.id ? "active" : ""}`}
                 onClick={() => handleIconClick(item.id)}
               >
                 <span className="menu-icon">{item.icon}</span>
@@ -67,7 +70,6 @@ const Sidebar = ({ onToggle }) => {
         <div className="sidebar-expanded">
           <div className="sidebar-header">
             <h2>GOGRUB</h2>
-
             <button className="toggle-btn" onClick={toggleSidebar}>
               ←
             </button>
@@ -76,7 +78,7 @@ const Sidebar = ({ onToggle }) => {
             {menuItems.map((item) => (
               <div
                 key={item.id}
-                className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
+                className={`menu-item ${activeItem === item.id ? "active" : ""}`}
                 onClick={() => handleIconClick(item.id)}
               >
                 <span className="menu-icon">{item.icon}</span>
