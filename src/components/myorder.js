@@ -1,9 +1,13 @@
 import react from 'react';
+import {ClipboardList} from 'lucide-react';
+import './Myorder.css';
+
+
 const Myorder= () => {
   return (  
-    <div>
-        <h1>My Order Page</h1>  
-        <p>This is the My Order component.</p>
+    <div className='myorder-content'>
+        <h1>You don't have any orders yet</h1>  
+        <ClipboardList size={240} />
     </div>
   );
 }   

@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import {
   LayoutDashboard,
-  ShoppingCart,
   Heart,
-  Clock,
+  ClipboardList,
   ShoppingBasket,
   Settings,
+  Bike,
 } from "lucide-react"; // <-- icon pack
 import "./Sidebar.css";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ onToggle }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [activeItem, setActiveItem] = useState("dashboard");
+  
 
   const menuItems = [
     { id: "dashboard", icon: <LayoutDashboard size={24} />, label: "Dashboard",path:"/" },
-    { id: "food-order", icon: <ShoppingCart size={24} />, label: "Food Order",path:"/checkout" },
-    { id: "favorite", icon: <Heart size={24} />, label: "Favorite",path:"/favorites" },
-    { id: "order-history", icon: <Clock size={24} />, label: "Order History",path:"/orderhistory" },
-    { id: "bills", icon: <ShoppingBasket size={24} />, label: "Basket", path:"/myorder" },
+     { id: "favorite", icon: <Heart size={24} />, label: "Favorite",path:"/favorites" },
+      { id: "bills", icon: <ShoppingBasket size={24} />, label: "Checkout", path:"/checkout" },
+    { id: "food-order", icon: <Bike size={24} />, label: "My Orders",path:"/myorder" },
+   
+    { id: "order-history", icon: <ClipboardList size={24} />, label: "Order History",path:"/orderhistory" },
+  
     { id: "setting", icon: <Settings size={24} />, label: "Setting",path:"/profile" },
   ];
 
@@ -60,7 +64,9 @@ const Sidebar = ({ onToggle }) => {
                 className={`menu-item ${activeItem === item.id ? "active" : ""}`}
                 onClick={() => handleIconClick(item.id)}
               >
+                <Link to={item.path} >
                 <span className="menu-icon">{item.icon}</span>
+                </Link>
               </div>
             ))}
           </div>
@@ -81,8 +87,10 @@ const Sidebar = ({ onToggle }) => {
                 className={`menu-item ${activeItem === item.id ? "active" : ""}`}
                 onClick={() => handleIconClick(item.id)}
               >
+              <Link to={item.path} >
                 <span className="menu-icon">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
+                </Link>
               </div>
             ))}
           </div>

@@ -7,7 +7,9 @@ import Home from './Components/Home';
 import Profile from './Components/Profile';
 
 import Orderhistory from './Components/Orderhistory';
-
+import Privatechef from './Components/Privatechef';
+import Gas from './Components/Gas';
+import Shopping from './Components/Shopping';
 
 
 import Checkout from './Components/Checkout';
@@ -40,6 +42,9 @@ function App() {
           <Route path="/delightmeals" element={<Delightmeals />} />
           <Route path="/fastfood" element={<Fastfood />} />
           <Route path="/snacks" element={<Snacks />} />
+          <Route path="/gas" element={<Gas />} />
+         <Route path="/privatechef" element={<Privatechef />} /> 
+          <Route path="/shopping" element={<Shopping/>} />
         </Routes>
       </div>
     </div>
